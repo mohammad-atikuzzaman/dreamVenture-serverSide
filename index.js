@@ -78,7 +78,6 @@ async function run() {
         Traveltime,
         Visitor,
       } = req.body;
-      console.log(id);
       const options = { upsert: true };
       const query = { _id: new ObjectId(id) };
 
@@ -139,7 +138,7 @@ async function run() {
       const result = await touristSpots.insertOne(touristSpot);
       res.send(result);
     });
-    
+
     app.post("/feedback", async (req, res) => {
       const { user, email, message } = req.body;
       const userFeedback = {
