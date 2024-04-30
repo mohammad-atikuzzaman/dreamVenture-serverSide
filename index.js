@@ -24,7 +24,6 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
 
     const database = client.db("dreamVenture");
@@ -140,9 +139,9 @@ async function run() {
       const result = await touristSpots.insertOne(touristSpot);
       res.send(result);
     });
+    
     app.post("/feedback", async (req, res) => {
       const { user, email, message } = req.body;
-      console.log(user, email, message);
       const userFeedback = {
         user,
         email,
