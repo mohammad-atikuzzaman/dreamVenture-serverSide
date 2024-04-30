@@ -30,6 +30,8 @@ async function run() {
     const database = client.db("dreamVenture");
     const touristSpots = database.collection("touristSpots");
     const feedback = database.collection("feedback");
+    const countries = database.collection("countries");
+
 
     app.get("/spots", async (req, res) => {
       const cursor = touristSpots.find();
@@ -41,6 +43,20 @@ async function run() {
       const cursor = feedback.find();
       const result = await cursor.toArray();
       res.send(result);
+    });
+
+    app.get("/countries", async (req, res) => {
+      const cursor = countries.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/myCountries/:name", async (req, res) => {
+      const country = req.params.name;
+      const query = {Country : country}
+      const data = await touristSpots.find(query);
+      const result = await data.toArray()
+      res.send(result)
     });
 
     app.get("/spots/:id", async (req, res) => {
